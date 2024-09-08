@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import TestHomePage from './testHomePage';
+import Chat from './Chat';
+import Layout from './Layout';
+import Login from './Login';
+import Signup from './Signup';
+import NoPermission from './NoPermission'
+import PrivateRoute  from './PrivateRoute';
+import Settings from './Settings';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const router = createBrowserRouter([
+  {
+    path: 'home/',
+    element: <PrivateRoute><Layout /></PrivateRoute>,
+    children: [
+      { path: 'chat/', element: <PrivateRoute> <Chat /> </PrivateRoute>},
+      { path: '', element: <PrivateRoute><TestHomePage /></PrivateRoute> },
+      { path: 'settings/', element: <PrivateRoute><Settings /></PrivateRoute> },
+    ],
+  },
+  {
+    path: '/',
+    element: <Login />
+  },
+  { 
+    path: 'signup/', 
+    
+    element: <Signup /> 
+  },
+  {
+    path: 'permissionDenied/',
+    element: <NoPermission/>
+  },
+  
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;
+
