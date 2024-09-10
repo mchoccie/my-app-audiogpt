@@ -39,6 +39,7 @@ const settingsFields = [
 
 function Settings() {
     const token = localStorage.getItem('authToken');
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [notification, setNotification] = useState({ message: '' });
 
     const handleChange = (event) => {
@@ -65,15 +66,15 @@ function Settings() {
         let successMessage = '';
 
         if (text === 'Password Reset') {
-            url = 'http://127.0.0.1:8000/api/changePass';
+            url = `${apiUrl}/api/changePass`;
             data = changePassData;
             successMessage = 'Password changed';
         } else if (text === 'API Key Reset') {
-            url = 'http://127.0.0.1:8000/api/changeKey';
+            url = `${apiUrl}/api/changeKey`;
             data = changeKeyData;
             successMessage = 'API Key changed';
         } else {
-            url = 'http://127.0.0.1:8000/api/changeLangchain';
+            url = `${apiUrl}/api/changeLangchain`;
             data = changeLangchainData;
             successMessage = 'Langchain Key changed';
         }

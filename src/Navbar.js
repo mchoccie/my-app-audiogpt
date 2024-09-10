@@ -22,12 +22,13 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL;
   const token = localStorage.getItem('authToken');
 
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/logout', {
+      const response = await fetch(`${apiUrl}/api/logout`, {
         method: 'POST',
         headers: {
           'Authorization': `Token ${token}`,

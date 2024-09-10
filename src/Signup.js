@@ -57,6 +57,7 @@ const signupFields = [
 
 function Signup() {
 
+    const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [Duplicate, setDuplicate] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
@@ -114,7 +115,7 @@ function Signup() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/signup', {
+            const response = await fetch(`${apiUrl}/api/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

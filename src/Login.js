@@ -26,6 +26,7 @@ const loginFields = [
 ];
 
 function Login() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [formState, setFormState] = useState({
         email: "",
@@ -77,7 +78,8 @@ function Login() {
         };
         
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/login', {
+            
+            const response = await fetch(`${apiUrl}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

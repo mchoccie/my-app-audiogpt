@@ -92,6 +92,7 @@ export default function Chat() {
 
   const handleSubmit = async () => {
     if (!input.trim()) return; // Don't submit empty inputs
+    const apiUrl = process.env.REACT_APP_API_URL;
     console.log('Input submitted:', input);
     const newMessage = { role: "user", id: messages.length + 1, text: input };
     addMessage(newMessage);
@@ -100,7 +101,7 @@ export default function Chat() {
   
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/add-message', {
+      const response = await fetch(`${apiUrl}/api/add-message`, {
         method: 'POST',
         headers: {
           'Authorization': `Token ${token}`,
