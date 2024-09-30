@@ -4,6 +4,7 @@ import logo from "./images/logo.png";
 
 function TestHomePage() {
   const token = localStorage.getItem('authToken');
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [msg, setMsg] = useState(null);
@@ -30,7 +31,7 @@ function TestHomePage() {
     setMsg("Uploading...");
     setProgress({ started: true, pc: 0 });
 
-    axios.post('/api/add-audio', fd, {
+    axios.post(`${apiUrl}/api/add-audio`, fd, {
       onUploadProgress: (progressEvent) => {
         const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
         setProgress({ started: true, pc: percentCompleted });
